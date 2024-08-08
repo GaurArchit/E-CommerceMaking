@@ -4,8 +4,10 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import { error } from "console";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 
 dotenv.config();
 app.use(express.json());
@@ -65,7 +67,7 @@ app.get("/500", async (req, res) => {
 
     await Menur.insertMany(menuItems);
     console.log("Data inserted successfully");
-    res.send("Done");
+    res.send(menuItems);
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).send("Error inserting data");
