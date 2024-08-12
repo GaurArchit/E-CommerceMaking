@@ -74,6 +74,47 @@ app.get("/500", async (req, res) => {
   }
 });
 
+//Adding Products to Site ---------------------------------------------------------------------------
+
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  stock: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  imageUrl: {
+    type: String,
+    required: true, // This would be the URL to the image
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const Product = mongoose.model("Product", productSchema);
+
+//---------------------------------------------------------------
 app.listen(5030, () => {
   console.log("connection established");
 });
